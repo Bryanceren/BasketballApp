@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.example.kriz.basketballapp.Acttivities.MainActivity
 import com.example.kriz.basketballapp.ScoreViewModel
 import com.example.kriz.basketballapp.R
 import com.example.kriz.basketballapp.Room.Entities.Partido
@@ -27,10 +28,7 @@ class GameFragment : Fragment() {
         val args = GameFragmentArgs.fromBundle(arguments!!)
         val partido=Partido(args.nombreA,args.nombreB,0,0,args.date,"")
 
-        /*val df = SimpleDateFormat("dd-MMM-yyyy")
-        val formattedDate = df.format(args.date)
-        */
-        scoreViewModel = ViewModelProviders.of(this).get(ScoreViewModel::class.java)
+        scoreViewModel=MainActivity.scoreViewModel
         partidoViewModel = ViewModelProviders.of(this).get(PartidoViewModel::class.java)
         partidoViewModel.insertMarches(partido)
         date=args.date
@@ -40,6 +38,13 @@ class GameFragment : Fragment() {
         binding.tvScoreTeamB.text=scoreViewModel.scoreB.value.toString()
         binding.btDone.setOnClickListener{
             notifyChange()
+            if(scoreViewModel.scoreA.value!! > scoreViewModel.scoreB.value!!){
+                partidoViewModel.setWinner(date,args.nombreA)
+            }else{
+                partidoViewModel.setWinner(date,args.nombreB)
+            }
+            scoreViewModel.scoreA.value=0
+            scoreViewModel.scoreB.value=0
             Navigation.findNavController(it).navigate(R.id.action_gameFragment_to_allFragment)
         }
         binding.lifecycleOwner = this
@@ -47,31 +52,9 @@ class GameFragment : Fragment() {
         return binding.root
 
     }
-    fun addOneTeamA(v:View) {
-        scoreViewModel.scoreA.value = scoreViewModel.scoreA.value?.plus(1)
-    }
-
-    fun addOneTeamB(v:View) {
-        scoreViewModel.scoreB.value = scoreViewModel.scoreB.value?.plus(1)
-    }
-
-    fun addTwoTeamA(v:View) {
-        scoreViewModel.scoreA.value = scoreViewModel.scoreA.value?.plus(2)
-    }
-
-    fun addTwoTeamB(v:View) {
-        scoreViewModel.scoreB.value = scoreViewModel.scoreB.value?.plus(2)
-    }
-
-    fun addThreeTeamA(v:View) {
-        scoreViewModel.scoreA.value = scoreViewModel.scoreA.value?.plus(3)
-    }
-
-    fun addThreeTeamB(v: View) {
-        scoreViewModel.scoreB.value = scoreViewModel.scoreB.value?.plus(3)
-    }
     fun notifyChange(){
         partidoViewModel.setPointsA(date,scoreViewModel.scoreA.value!!)
         partidoViewModel.setPointsB(date,scoreViewModel.scoreB.value!!)
     }
+
 }

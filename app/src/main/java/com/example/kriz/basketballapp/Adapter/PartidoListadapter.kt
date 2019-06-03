@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kriz.basketballapp.Fragments.AllFragmentDirections
 import com.example.kriz.basketballapp.R
 import com.example.kriz.basketballapp.Room.Entities.Partido
 
@@ -41,7 +43,9 @@ class PartidoListadapter internal constructor(
 
 
         holder.wholeitem.setOnClickListener {
-
+            Navigation.findNavController(it)
+                .navigate(AllFragmentDirections
+                    .actionAllFragmentToDetailsFragment(current.EquipoA,current.EquipoB,current.fecha,current.puntosA,current.puntosB,current.ganador))
         }
 
 

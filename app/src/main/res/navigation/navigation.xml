@@ -51,5 +51,24 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.kriz.basketballapp.Fragments.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment">
+        <argument
+            android:name="nombreA"
+            app:argType="string" />
+        <argument
+            android:name="nombreB"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="puntosA"
+            app:argType="integer" />
+        <argument
+            android:name="puntosB"
+            app:argType="integer" />
+        <argument
+            android:name="ganador"
+            app:argType="string" />
+    </fragment>
 </navigation>
