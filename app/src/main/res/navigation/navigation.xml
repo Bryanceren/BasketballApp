@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.kriz.basketballapp.Fragments.TitleFragment"
+        android:label="TitleFragment" >
+        <action
+            android:id="@+id/action_titleFragment_to_newFragment"
+            app:destination="@id/newFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_allFragment"
+            app:destination="@id/allFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allFragment"
+        android:name="com.example.kriz.basketballapp.Fragments.AllFragment"
+        android:label="AllFragment" >
+        <action
+            android:id="@+id/action_allFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newFragment"
+        android:name="com.example.kriz.basketballapp.Fragments.NewFragment"
+        android:label="NewFragment" >
+        <action
+            android:id="@+id/action_newFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.kriz.basketballapp.Fragments.GameFragment"
+        android:label="GameFragment" >
+        <action
+            android:id="@+id/action_gameFragment_to_allFragment"
+            app:destination="@id/allFragment"
+            app:popUpTo="@+id/titleFragment" />
+        <argument
+            android:name="nombreA"
+            app:argType="string" />
+        <argument
+            android:name="nombreB"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.kriz.basketballapp.Fragments.DetailsFragment"
+        android:label="DetailsFragment" />
+</navigation>
